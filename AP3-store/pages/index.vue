@@ -17,21 +17,10 @@
 </template>
 
 <script setup lang="ts">
-    interface Brand {
-        id: number;
-        title: string;
-    }
+    import type{ Product, Brand } from '~/types'
 
-    interface Product {
-        id: number;
-        title: string;
-        brand: number;
-        quantity?: number;
-        brandName?: string;
-    }
-
-    let brands = useState<Brand>('setBrands', () => []); // в пиниа
-    let products = useState<Product>('setProducts', () => []);
+    const brands = useState<Brand[]>('setBrands', () => []); // в пиниа
+    const products = useState<Product[]>('setProducts', () => []);
 
     const fetchBrands = async () => {
         try {
