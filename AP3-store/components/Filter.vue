@@ -28,12 +28,8 @@
     const isMobile = ref(false)
     const selectedId = ref(0)
 
-    const props = defineProps({
-        filterData: {
-            type: Array,
-            default: []
-        }
-    })
+    const props = defineProps<{ filterData: string[]}>();
+    const emit = defineEmits<{ (id: "selectedFilter"): number }>();
 
     const selectedFilterData = computed({
         get() {
@@ -54,8 +50,7 @@
     })
 
     const filterOut = (id: number) => {
-        const emit = defineEmits()
-        emit('selectedFilter', id);
+        emit('selectedFilter', id); 
         selectedId.value = id;
     }
 
