@@ -69,24 +69,17 @@
 
 <style scoped lang='scss'>
     .catalog__wrapper {
-        display: flex;
-        flex-direction: row;
-        gap: 100px;
         padding: 20px 5%;
-    }
-    .catalog__filters {
-        flex: 1 1 15%;
-    }
-    .catalog__items__wrapper {
-        flex: 1 1 85%;
-        display: block;
+        display: inline-grid;
+        grid-template-columns: 1fr 4fr;
+        gap: 100px;
     }
     .catalog__items {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        min-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 250px);
         gap: 50px;
+        justify-content: flex-start;
     }
     .catalog__title {
         font-size: 24px;
@@ -95,7 +88,8 @@
     }
     @media(max-width: 768px) {
         .catalog__wrapper {
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 20px;
         }
         .catalog__items {
