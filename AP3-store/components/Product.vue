@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+    import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
     const props = defineProps<{ productData: string[]}>();
 
     const productDataId = computed(() => {
@@ -37,44 +38,46 @@
             else return ''
     })
 
+    const cartStore = useCartStore()
     const addProduct = () => {
-        //this.$store.commit("addToCart", this.productData)
+        cartStore.addToCart(props.productData);
     }
 </script>
 
-<style scoped>
-    .product__wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        padding: 5px;
-        border: 1px solid #fff;
-    }
-    .product__button {
-        font-size: 16px;
-        padding: 5px;
-        width: 100%;
-        background-color: #fff;
-        border: 1px solid #808080;
-    }
-    .product__button:hover {
-        cursor: pointer;
-        border: 1px solid #ffdd00;
-    }
-    .product__name {
-        font-size: 20px;
-        margin: 0;
-    }
-    .product__info {
-        font-size: 16px;
-        margin: 0;
-    }
-    .product__image__wrapper {
-        height: 300px;
-        width: 250px;
-        align-content: center;
-    }
-    .product__image {
-        width: inherit;
+<style scoped lang="scss">
+    .product {
+        &__wrapper {
+            display: grid;
+            gap: 5px;
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+        &__button {
+            font-size: 16px;
+            padding: 5px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #808080;
+            &__:hover {
+                cursor: pointer;
+                border: 1px solid #ffdd00;
+            }
+        }
+        &__name {
+            font-size: 20px;
+            margin: 0;
+        }
+        &__info {
+            font-size: 16px;
+            margin: 0;
+        }
+        &__image {
+            width: inherit;
+            &__wrapper {
+                height: 300px;
+                width: 250px;
+                align-content: center;
+            }
+        }
     }
 </style>
