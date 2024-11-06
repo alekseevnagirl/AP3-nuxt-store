@@ -1,12 +1,12 @@
 <template>
 <div class="catalog__wrapper">
-        <Filter :filter-data="brands"/>
+        <Filter :filter-data="brandsStore.brands"/>
 
         <div class="catalog__items__wrapper">
             <p class="catalog__title">Catalog</p>
             <div class="catalog__items">
                 <div
-                    v-for="(product, productId) in products" 
+                    v-for="(product, productId) in productsStore.products" 
                     :key="productId" 
                     class="catalog__item">
                     <Product :product-data="product"/>
@@ -17,42 +17,15 @@
 </template>
 
 <script setup lang="ts">
-    import type{ Product, Brand } from '~/types'
+    import { useBrandsStore } from '~/stores/brands' // автоимпорт в nuxt.config
+    import { useProductsStore } from '~/stores/products'
 
-    const brands = useState<Brand[]>('setBrands', () => []); // в пиниа
-    const products = useState<Product[]>('setProducts', () => []);
-
-    const fetchBrands = async () => {
-        try {
-            brands.value = await $fetch<Brand[]>('/brands.json');
-            if (brands.value[0].id !== 0) {
-                brands.value = [{ 
-                    id: 0,
-                    title: "All Brands"
-                }, ...brands.value];
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const fetchProducts = async () => {
-        try {
-            products.value = await $fetch<Product[]>('/products.json');
-            products.value.forEach((product: Product) => {
-                product.quantity = 1;
-                const brand = brands.value.find((brand: Brand) => product.brand === brand.id);
-                if (brand) product.brandName = brand.title;
-                else product.brandName = '';
-            })
-        } catch (error) {
-        console.error(error);
-        }
-    };
+    const brandsStore = useBrandsStore()
+    const productsStore = useProductsStore()
 
     onMounted(() => {
-        fetchBrands();
-        fetchProducts();
+        brandsStore.fetchBrands();
+        productsStore.fetchProducts();
     });
 </script>
 

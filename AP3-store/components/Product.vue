@@ -37,9 +37,9 @@
         if (props.productData?.regular_price?.currency) return '$'
             else return ''
     })
-
-    const cartStore = useCartStore()
+    
     const addProduct = () => {
+        const cartStore = useCartStore()
         cartStore.addToCart(props.productData);
     }
 </script>

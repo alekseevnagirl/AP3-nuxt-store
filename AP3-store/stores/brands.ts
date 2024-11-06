@@ -1,14 +1,24 @@
 import type{ Brand } from '~/types'
 
-export const useBrandsStore = defineStore('alerts', {
+export const useBrandsStore = defineStore('brands', {
     state: () => {
         return {
             brands:[] as Brand[]
         }
     },
     actions: {
-        addBrand(brand: Brand) {
-            this.brands.push(brand)
+        async fetchBrands () {
+            try {
+                this.brands = await $fetch<Brand[]>('/brands.json');
+                if (this.brands[0].id !== 0) {
+                    this.brands = [{ 
+                        id: 0,
+                        title: "All Brands"
+                    }, ...this.brands];
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 })
