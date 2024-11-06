@@ -2,26 +2,29 @@
     <div 
         :id="productDataId"
         class="product__wrapper">
-        <div class="product__image__wrapper">
-            <img 
-                :src="productData.image" 
-                class="product__image">
-        </div>
-        <p class="product__name">
-            {{ productData.title }}
-        </p>
-        <p class="product__info">
-            {{ productData.brandName }}
-        </p>
-        <p class="product__info">
-            {{ currency }}{{ productData?.regular_price?.value }}
-        </p>
+        <v-card>
+            <v-img
+                :width="250"
+                cover
+                :src="productData.image"
+            />
 
-        <button 
-            class="product__button"
-            @click="addProduct">
-            Добавить
-        </button>
+            <v-card-title>
+                {{ productData.title }}
+            </v-card-title>
+
+            <v-card-subtitle class="product__subtitle">
+                {{ subtitle }}
+            </v-card-subtitle>
+
+            <v-card-actions>
+                <v-btn 
+                    class="product__button"
+                    @click="addProduct">
+                    Добавить
+                </v-btn>
+            </v-card-actions>
+        </v-card>
     </div>
 </template>
 
@@ -29,6 +32,7 @@
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types'
     import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
+
     const props = defineProps<{ productData: Product}>();
 
     const productDataId = computed(() => {
@@ -39,6 +43,10 @@
         if (props.productData?.regular_price?.currency) return '$'
             else return ''
     })
+
+    const subtitle = computed(() => {
+        return `${props.productData.brandName}\n${currency.value}${props.productData.regular_price.value}`;
+    })
     
     const addProduct = () => {
         const currentVariant = deepClone(props.productData);
@@ -48,39 +56,17 @@
 </script>
 
 <style scoped lang="scss">
-    .product {
-        &__wrapper {
-            display: grid;
-            gap: 5px;
-            padding: 5px;
-            border: 1px solid #fff;
-        }
-        &__button {
-            font-size: 16px;
-            padding: 5px;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #808080;
-            &__:hover {
-                cursor: pointer;
-                border: 1px solid #ffdd00;
-            }
-        }
-        &__name {
-            font-size: 20px;
-            margin: 0;
-        }
-        &__info {
-            font-size: 16px;
-            margin: 0;
-        }
-        &__image {
-            width: inherit;
-            &__wrapper {
-                height: 300px;
-                width: 250px;
-                align-content: center;
-            }
-        }
+    .product__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 5px;
+        border: 1px solid #fff;
+    }
+    .product__subtitle {
+        white-space: pre-line;
+    }
+    .product__button {
+        width: 100%;
     }
 </style>
