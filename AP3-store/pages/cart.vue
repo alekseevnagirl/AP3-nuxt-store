@@ -4,10 +4,12 @@
 
         <div class="cart__data__header">
             <p class="cart__data__header__item">Item</p>
-            <p>Price</p>
-            <p>Qty</p>
-            <p>Total</p>
-            <p/>
+            <div class="cart__data__info">
+                <p>Price</p>
+                <p>Qty</p>
+                <p>Total</p>
+                <p/>
+            </div>
         </div>
 
         <div
@@ -18,21 +20,36 @@
         </div>
 
         <div class="cart__subtotal">
-            <p>Subtotal: {{ currency }}{{ subtotal }}</p>
-            <button>
+            Subtotal: {{ currency }}{{ subtotal }}
+            <v-btn>
                 Checkout
-            </button>
+            </v-btn>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+    import type { Cart } from '~/types'
     import { useCartStore } from '~/stores/cart'
 
     const cartStore = useCartStore();
 
     const cartItems = computed(() => {
         return cartStore.cart;
+    })
+
+    const currency = computed(() => {
+        if (cartStore.cart[0]?.regular_price?.currency === 'USD') return '$'
+        else return ''
+    })
+
+    const subtotal = computed(() => {
+        let subtotal = 0;
+        cartStore.cart.forEach((product: Cart) => {
+            subtotal = subtotal + (product.quantity * product?.regular_price?.value); // асинхронные запросы
+        })
+        subtotal = subtotal.toFixed(2);
+        return subtotal;
     })
 </script>
 
@@ -45,35 +62,28 @@
         margin: 20px 5px;
     }
     .cart__data__header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 2.5fr 2fr;
         width: 100%;
     }
     .cart__data__header p {
         padding: 5px;
-        flex: 1 1 10%;
         margin: 0;
         font-weight: bold;
         font-size: 18px;
         text-align: center;
     }
-    .cart__data__header__item {
-        flex: 1 1 55% !important;
-        text-align: center;
+    .cart__data__info {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
     }
     .cart__subtotal {
-        display: flex;
-        align-items: flex-end;
-        flex-direction: column;
+        display: grid;
+        justify-content: end;
         font-size: 24px;
         font-weight: bold;
-    }
-    .cart__subtotal button {
-        font-size: 18px;
-        padding: 5px 20px;
-        background-color: #fff;
-        box-shadow: 10px 5px 5px #808080;
+        gap: 20px;
+        padding: 10px;
     }
 
     @media(max-width: 768px) {
