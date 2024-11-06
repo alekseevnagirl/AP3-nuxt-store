@@ -19,9 +19,16 @@
 </template>
 
 <script setup lang="ts">
+    import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
+    import type{ Cart } from '~/types'
+
     const route = useRoute();
     const quantity = computed(() => {
-        return 0;
+        let count = 0;
+        useCartStore().cart.forEach((item: Cart) => {
+            count = count + item.quantity
+        })
+        return count
     });
 </script>
 
