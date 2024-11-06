@@ -26,8 +26,10 @@
 </template>
 
 <script setup lang="ts">
+    import deepClone from 'lodash.clonedeep';
+    import type { Product } from '~/types'
     import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
-    const props = defineProps<{ productData: string[]}>();
+    const props = defineProps<{ productData: Product}>();
 
     const productDataId = computed(() => {
         return 'product' + props.productData?.id
@@ -39,8 +41,9 @@
     })
     
     const addProduct = () => {
+        const currentVariant = deepClone(props.productData);
         const cartStore = useCartStore()
-        cartStore.addToCart(props.productData);
+        cartStore.addToCart(currentVariant);
     }
 </script>
 

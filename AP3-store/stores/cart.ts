@@ -17,8 +17,9 @@ export const useCartStore = defineStore('alerts', {
             if (!isProductInCart) 
                 this.cart.push(product)
         },
-        deleteFromCart(productId: number) {
-            this.cart = this.cart.filter((product: Cart) => product.id !== productId)
+        deleteFromCart(product: Product) {
+            const index = this.cart.findIndex((item) => item.id === product.id);
+            this.cart = this.cart.filter((item, itemId) => itemId !== index);
         },
         updateCart(product: Product) {
             const index = this.cart.findIndex((item: Cart) => item.id === product.id);
