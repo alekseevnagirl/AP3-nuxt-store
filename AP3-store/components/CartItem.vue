@@ -15,18 +15,20 @@
                     <div class="cartItem__brand">
                         {{ cartItemData.brandName }} / {{ cartItemData.title }}
                     </div>
-                    <div v-if="cartItemData.variant"
+                    <div 
+                        v-if="cartItemData.variant"
                         class="cartItem__color__size">
                         Color: {{ cartItemData?.variant?.product?.sku.split('-')[1] }}
                     </div>
-                    <div v-if="cartItemData.variant"
+                    <div
+                        v-if="cartItemData.variant"
                         class="cartItem__color__size">
                         Size: {{ cartItemData?.variant?.product?.sku.split('-')[2].toUpperCase() }}
                     </div>
                 </div>
 
                 <div class="cartItem__price">
-                    {{ currency }}{{ cartItemData?.regular_price?.value }}
+                    Price {{ currency }}{{ cartItemData?.regular_price?.value }}
                 </div>
 
                 <div>
@@ -40,7 +42,7 @@
                 </div>
 
                 <div class="cartItem__total">
-                    {{ currency }}{{ total }}
+                    Total {{ currency }}{{ total }}
                 </div>
 
                 <div class="cartItem__trash__wrapper">
@@ -90,16 +92,14 @@
 
 <style scoped lang="scss">
     .cartItem__wrapper {
-        display: flex;
+        display: grid;
         border-bottom: 1px solid #000;
         margin: 10px 0;
-    }
-    .cartItem__image__wrapper {
-        flex: 1 1 20%;
+        grid-template-columns: 1fr 4fr;
     }
     .cartItem__info__wrapper {
-        flex: 1 1 80%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
         align-items: center;
         text-align: center;
         justify-content: center;
@@ -108,7 +108,6 @@
     .cartItem__info__wrapper div {
         padding: 5px;
         font-size: 18px;
-        flex: 1 1 10%;
     }
     .cartItem__info__wrapper div p {
         margin: 0;
@@ -117,15 +116,10 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    .cartItem__info__characteristics {
-        flex: 1 1 40% !important;
-    }
     .cartItem__brand {
-        display: flex;
-        align-items: center;
+        text-align: left;
     }
     .cartItem__color__size {
-        display: flex;
         font-size: 14px !important;
         padding: 0 0 0 5px !important;
     }
@@ -146,15 +140,14 @@
 
     @media(max-width: 768px) {
         .cartItem__info__wrapper {
-            flex-direction: column;
-            align-items: flex-start;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(5, auto);
             max-width: 100%;
-            align-content: flex-start;
+            justify-items: start;
         }
         .cartItem__info__wrapper div {
             max-width: 100%;
             font-size: 16px;
-            flex: 1 1 20%;
         }
         .cartItem__trash {
             float: right;
@@ -166,9 +159,6 @@
         .cartItem__image {
             width: 150px;
             height: 150px;
-        }
-        .cartItem__info__characteristics {
-            flex: 1 1 60% !important;
         }
         .cartItem__total {
             font-weight: bold;
