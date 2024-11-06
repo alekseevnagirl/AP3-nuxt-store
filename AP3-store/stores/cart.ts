@@ -3,7 +3,7 @@ import type{ Product, Cart } from '~/types'
 export const useCartStore = defineStore('alerts', {
     state: () => {
         return {
-            cart:[]
+            cart: [] as Cart[]
         }
     },
     actions: {
@@ -18,11 +18,11 @@ export const useCartStore = defineStore('alerts', {
                 this.cart.push(product)
         },
         deleteFromCart(productId: number) {
-            this.cart = this.cart.filter((product: string[]) => product.id !== productId)
+            this.cart = this.cart.filter((product: Cart) => product.id !== productId)
         },
-        updateCart(product: string[]) {
-            const index = this.cart.findIndex((item: string[]) => item.id === product.id);
+        updateCart(product: Product) {
+            const index = this.cart.findIndex((item: Cart) => item.id === product.id);
             this.cart[index] = product;
         }
     }
-  })
+})

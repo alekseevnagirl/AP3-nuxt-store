@@ -7,10 +7,14 @@ export interface Product {
     id: number;
     title: string;
     brand: number;
-    quantity?: number;
-    brandName?: string;
+    quantity: number;
+    brandName: string;
 }
 
 export interface Cart {
     id: number;
+    title: string;
+    brand: number;
+    quantity: number;
+    brandName: string;
 }
