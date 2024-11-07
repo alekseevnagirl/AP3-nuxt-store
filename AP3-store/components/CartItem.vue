@@ -166,7 +166,7 @@
         }
         .cartItem__total {
             font-weight: bold;
-            display: -webkit-inline-box;
+            display: -webkit-box;
         }
         .cartItem__quantity {
             width: 100px;
@@ -175,7 +175,7 @@
             padding-left: 0 !important; 
         }
         .cartItem__price{
-            display: -webkit-inline-box;
+            display: -webkit-box;
         }
         .cartItem__price__title {
             display: block;

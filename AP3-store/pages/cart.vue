@@ -13,14 +13,14 @@
         </div>
 
         <div
-            v-for="(item, id) in cartItems" 
+            v-for="(item, id) in cartStore.cart" 
             :key="id">
             <CartItem 
                 :cart-item-data="item"/>
         </div>
 
         <div class="cart__subtotal">
-            Subtotal: {{ currency }}{{ subtotal }}
+            {{ subtotal }}
             <v-btn>
                 Checkout
             </v-btn>
@@ -33,22 +33,21 @@
 
     const cartStore = useCartStore();
 
-    const cartItems = computed(() => {
-        return cartStore.cart;
-    })
-
-    const currency = computed(() => {
-        if (cartStore.cart[0]?.regular_price?.currency === 'USD') return '$'
-        else return ''
-    })
-
     const subtotal = computed(() => {
         let subtotal = 0;
         cartStore.cart.forEach((product: Cart) => {
-            subtotal = subtotal + (product.quantity * product?.regular_price?.value); // асинхронные запросы
+            subtotal = subtotal + (product.quantity * product?.regular_price?.value);
         })
-        subtotal = subtotal.toFixed(2);
-        return subtotal;
+        subtotal = parseFloat(subtotal.toFixed(2));
+
+        if (subtotal !== 0) {
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: cartStore.cart[0]?.regular_price?.currency
+            });
+            return 'Subtotal: ' + formatter.format(subtotal);
+        }
+        else return 'Subtotal: 0'
     })
 </script>
 
@@ -66,8 +65,7 @@
         width: 100%;
     }
     .cart__data__header p {
-        padding: 5px;
-        margin: 0;
+        margin: 5px;
         font-weight: bold;
         font-size: 18px;
         text-align: center;

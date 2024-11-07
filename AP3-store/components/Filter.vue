@@ -47,21 +47,21 @@
 </script>
 
 <style scoped lang="scss">
-.filter__select {
-    display: none;
-}
-.filter__list {
-    display: block;
-}
-.filter__list__selected {
-    text-decoration: underline;
-}
-@media(max-width: 768px) {
     .filter__select {
-        display: block;
-    }
-    .filter__list {
         display: none;
     }
-}
+    .filter__list {
+        display: block;
+    }
+    .filter__list__selected {
+        text-decoration: underline;
+    }
+    @media(max-width: 768px) {
+        .filter__select {
+            display: block;
+        }
+        .filter__list {
+            display: none;
+        }
+    }
 </style>
