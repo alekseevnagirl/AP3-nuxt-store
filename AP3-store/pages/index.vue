@@ -1,5 +1,5 @@
 <template>
-<div class="catalog__wrapper">
+    <div class="catalog__wrapper">
         <Filter
             :filter-data="brandsStore.brands"
             class="catalog__filters"
@@ -25,23 +25,21 @@
     import { useProductsStore } from '~/stores/products'
 
     const brandsStore = useBrandsStore()
-    const productsStore = useProductsStore()
+    const productsStore = useProductsStore() 
 
-    const filterData = ref([]);
-    const productsData = ref([]);
-    let filterId = ref(0);
+    const filterId = ref(0);
 
     const products = computed(() => {
-        let productsDataFiltered = productsData.value;
+        let productsDataFiltered = productsStore.products;
         if (filterId.value !== 0) {
-            productsDataFiltered = productsData.value.filter((product: Product) => {
+            productsDataFiltered = productsStore.products.filter((product: Product) => {
                 return product.brand === filterId.value;
             });
         }
         return productsDataFiltered
     })
 
-    onMounted(() => {
+    onMounted(() => {       
         brandsStore.fetchBrands();
         productsStore.fetchProducts();
     });
