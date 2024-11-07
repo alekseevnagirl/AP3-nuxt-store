@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isMobile">
+        <div class="filter__select">
             <v-select
                 v-model="selectedFilterData"
                 :items="filterData"
@@ -10,7 +10,7 @@
             />
         </div>
 
-        <div v-else>
+        <div class="filter__list">
             <v-list lines="one">
                 <v-list-item
                     v-for="(data, dataIndex) in filterData"
@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
     import type { Product, Brand } from '~/types'
-    const isMobile = ref(false)
     const selectedId = ref(0)
 
     const props = defineProps<{ filterData: Product[]}>();
@@ -41,34 +40,28 @@
         }
     });
 
-    onMounted(() => {
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-    });
-
-    onBeforeUnmount(() => {
-        window.removeEventListener('resize', checkMobile);
-    })
-
     const filterOut = (id: number) => {
         emit('selectedFilter', id); 
         selectedId.value = id;
     }
-
-    const checkMobile = () => {
-        isMobile.value = window.innerWidth <= 768
-    }
 </script>
 
 <style scoped lang="scss">
-.filter {
-    &__select {
-        width: 100%;
-        font-size: 18px;
-        padding: 5px;
+.filter__select {
+    display: none;
+}
+.filter__list {
+    display: block;
+}
+.filter__list__selected {
+    text-decoration: underline;
+}
+@media(max-width: 768px) {
+    .filter__select {
+        display: block;
     }
-    &__list__selected {
-        text-decoration: underline;
+    .filter__list {
+        display: none;
     }
 }
 </style>
