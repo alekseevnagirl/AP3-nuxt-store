@@ -36,6 +36,9 @@
         }
         return productsDataFiltered
     })
+    debugger
+    const { brands } = await useAsyncData('brands', () => brandsStore.fetchBrands());
+    //const { products } = await productsStore.fetchProducts();
 
     onMounted(() => {       
         brandsStore.fetchBrands();
