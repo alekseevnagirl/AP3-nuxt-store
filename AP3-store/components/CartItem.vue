@@ -29,7 +29,7 @@
 
                 <div class="cartItem__price">
                     <div class="cartItem__price__title">Price:</div> 
-                    {{ currency }}{{ cartItemData?.regular_price?.value }}
+                    {{ price }}
                 </div>
 
                 <div>
@@ -44,7 +44,7 @@
 
                 <div class="cartItem__total">
                     <div class="cartItem__price__title">Total:</div> 
-                    {{ currency }}{{ total }}
+                    {{ total }}
                 </div>
 
                 <div class="cartItem__trash__wrapper">
@@ -63,13 +63,13 @@
 
     const props = defineProps<{ cartItemData: Cart }>();
 
-    const currency = computed(() => {
-        if (props.cartItemData?.regular_price?.currency) return '$'
-        else return ''
-    });
     const total = computed(() => {
-        const totalPrice = (props.cartItemData?.regular_price?.value * props.cartItemData.quantity).toFixed(2)
-        return totalPrice
+        const totalPrice = parseFloat((props.cartItemData?.regular_price?.value * props.cartItemData.quantity).toFixed(2))
+        return usePrice(totalPrice, props.cartItemData?.regular_price?.currency); 
+    });
+
+    const price = computed(() => {
+        return usePrice(props.cartItemData?.regular_price?.value, props.cartItemData?.regular_price?.currency); 
     });
 
     const cartStore = useCartStore();

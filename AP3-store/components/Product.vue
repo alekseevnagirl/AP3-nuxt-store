@@ -38,13 +38,9 @@
         return 'product' + props.productData?.id
     })
 
-    const currency = computed(() => {
-        if (props.productData?.regular_price?.currency) return '$'
-            else return ''
-    })
-
     const subtitle = computed(() => {
-        return `${props.productData.brandName}\n${currency.value}${props.productData.regular_price.value}`;
+        const price = usePrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
+        return `${props.productData.brandName}\n${price}`;
     })
     
     const addProduct = () => {

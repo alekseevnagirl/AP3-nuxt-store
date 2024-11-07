@@ -38,16 +38,7 @@
         cartStore.cart.forEach((product: Cart) => {
             subtotal = subtotal + (product.quantity * product?.regular_price?.value);
         })
-        subtotal = parseFloat(subtotal.toFixed(2));
-
-        if (subtotal !== 0) {
-            const formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: cartStore.cart[0]?.regular_price?.currency
-            });
-            return 'Subtotal: ' + formatter.format(subtotal);
-        }
-        else return 'Subtotal: 0'
+        return 'Subtotal: ' + usePrice(parseFloat(subtotal.toFixed(2)), cartStore?.cart[0]?.regular_price?.currency); 
     })
 </script>
 
