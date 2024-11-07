@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="cartItem__price">
-                    <div class="cartItem__price__title">Price</div> 
+                    <div class="cartItem__price__title">Price:</div> 
                     {{ currency }}{{ cartItemData?.regular_price?.value }}
                 </div>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="cartItem__total">
-                    <div class="cartItem__price__title">Total</div> 
+                    <div class="cartItem__price__title">Total:</div> 
                     {{ currency }}{{ total }}
                 </div>
 
