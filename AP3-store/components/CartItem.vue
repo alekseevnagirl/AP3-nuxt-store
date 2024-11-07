@@ -28,7 +28,8 @@
                 </div>
 
                 <div class="cartItem__price">
-                    Price {{ currency }}{{ cartItemData?.regular_price?.value }}
+                    <div class="cartItem__price__title">Price</div> 
+                    {{ currency }}{{ cartItemData?.regular_price?.value }}
                 </div>
 
                 <div>
@@ -42,7 +43,8 @@
                 </div>
 
                 <div class="cartItem__total">
-                    Total {{ currency }}{{ total }}
+                    <div class="cartItem__price__title">Total</div> 
+                    {{ currency }}{{ total }}
                 </div>
 
                 <div class="cartItem__trash__wrapper">
@@ -137,6 +139,9 @@
     .cartItem__trash:hover {
         cursor: pointer;
     }
+    .cartItem__price__title {
+        display: none;
+    }
 
     @media(max-width: 768px) {
         .cartItem__info__wrapper {
@@ -162,12 +167,20 @@
         }
         .cartItem__total {
             font-weight: bold;
+            display: -webkit-inline-box;
         }
         .cartItem__quantity {
             width: 100px;
         }
         .cartItem__brand, .cartItem__color__size {
             padding-left: 0 !important; 
+        }
+        .cartItem__price{
+            display: -webkit-inline-box;
+        }
+        .cartItem__price__title {
+            display: block;
+            padding: 0 5px !important;
         }
     }
 </style>
