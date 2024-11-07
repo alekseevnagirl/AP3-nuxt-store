@@ -25,18 +25,19 @@
 </template>
 
 <script setup lang="ts">
+    import type { Product, Brand } from '~/types'
     const isMobile = ref(false)
     const selectedId = ref(0)
 
-    const props = defineProps<{ filterData: string[]}>();
+    const props = defineProps<{ filterData: Product[]}>();
     const emit = defineEmits<{ (id: "selectedFilter"): number }>();
 
     const selectedFilterData = computed({
         get() {
             return props.filterData[selectedId.value];
         },
-        set(id: number) {
-            filterOut(id);
+        set(brand: Brand) {
+            filterOut(brand.id);
         }
     });
 
