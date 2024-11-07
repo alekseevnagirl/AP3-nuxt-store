@@ -30,7 +30,7 @@
     const selectedId = ref(0)
 
     const props = defineProps<{ filterData: Product[]}>();
-    const emit = defineEmits<{ (id: "selectedFilter"): number }>();
+    const emit = defineEmits(["selectedFilter"]);
 
     const selectedFilterData = computed({
         get() {
