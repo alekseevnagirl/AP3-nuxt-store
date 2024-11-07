@@ -9,6 +9,10 @@ export interface Product {
     brand: number;
     quantity: number;
     brandName: string;
+    regular_price: {
+        currency: string;
+        value: number;
+    }
 }
 
 export interface Cart {
