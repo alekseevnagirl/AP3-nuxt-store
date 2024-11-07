@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-    import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
     import type{ Cart } from '~/types'
 
     const route = useRoute();

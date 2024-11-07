@@ -21,8 +21,6 @@
 
 <script setup lang="ts">
     import type { Product } from '~/types';
-    import { useBrandsStore } from '~/stores/brands' // автоимпорт в nuxt.config
-    import { useProductsStore } from '~/stores/products'
 
     const brandsStore = useBrandsStore()
     const productsStore = useProductsStore() 

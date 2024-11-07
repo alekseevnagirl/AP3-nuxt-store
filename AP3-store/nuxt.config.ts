@@ -12,5 +12,10 @@ export default defineNuxtConfig({
     vuetifyOptions: {
       /* vuetify options */
     }
+  },
+  alias: {
+    'useCartStore': '~/stores/cart',
+    'useBrandsStore': '~/stores/brands',
+    'useProductsStore': '~/stores/products'
   }
 })

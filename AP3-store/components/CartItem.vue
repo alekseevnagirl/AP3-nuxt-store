@@ -60,7 +60,6 @@
 <script setup lang="ts">
     import deepClone from 'lodash.clonedeep'
     import type { Cart } from '~/types'
-    import { useCartStore } from '~/stores/cart';
 
     const props = defineProps<{ cartItemData: Cart }>();
 

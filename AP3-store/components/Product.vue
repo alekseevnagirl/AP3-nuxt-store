@@ -31,7 +31,6 @@
 <script setup lang="ts">
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types'
-    import { useCartStore } from '~/stores/cart' // автоимпорт в nuxt.config
 
     const props = defineProps<{ productData: Product}>();
 

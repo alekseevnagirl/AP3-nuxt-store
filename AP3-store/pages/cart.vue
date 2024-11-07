@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
     import type { Cart } from '~/types'
-    import { useCartStore } from '~/stores/cart'
 
     const cartStore = useCartStore();
 
