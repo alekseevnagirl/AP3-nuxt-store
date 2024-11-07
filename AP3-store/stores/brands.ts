@@ -11,9 +11,11 @@ export const useBrandsStore = defineStore('brands', {
             try {
                 this.brands = await $fetch<Brand[]>('/brands.json');
                 if (this.brands[0].id !== 0) {
-                    this.brands = [{ 
+                    this.brands = [{
                         id: 0,
-                        title: "All Brands"
+                        title: "All Brands",
+                        sort: '',
+                        code: ''
                     }, ...this.brands];
                 }
             } catch (error) {

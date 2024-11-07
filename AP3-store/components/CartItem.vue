@@ -65,11 +65,11 @@
 
     const total = computed(() => {
         const totalPrice = parseFloat((props.cartItemData?.regular_price?.value * props.cartItemData.quantity).toFixed(2))
-        return usePrice(totalPrice, props.cartItemData?.regular_price?.currency); 
+        return getPrice(totalPrice, props.cartItemData?.regular_price?.currency); 
     });
 
     const price = computed(() => {
-        return usePrice(props.cartItemData?.regular_price?.value, props.cartItemData?.regular_price?.currency); 
+        return getPrice(props.cartItemData?.regular_price?.value, props.cartItemData?.regular_price?.currency); 
     });
 
     const cartStore = useCartStore();

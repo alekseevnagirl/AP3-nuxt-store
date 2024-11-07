@@ -38,7 +38,7 @@
         cartStore.cart.forEach((product: Cart) => {
             subtotal = subtotal + (product.quantity * product?.regular_price?.value);
         })
-        return 'Subtotal: ' + usePrice(parseFloat(subtotal.toFixed(2)), cartStore?.cart[0]?.regular_price?.currency); 
+        return 'Subtotal: ' + getPrice(parseFloat(subtotal.toFixed(2)), cartStore?.cart[0]?.regular_price?.currency); 
     })
 </script>
 

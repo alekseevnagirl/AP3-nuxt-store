@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ selectedFilterData }}
         <div class="filter__select">
             <v-select
                 v-model="selectedFilterData"
@@ -11,14 +12,18 @@
         </div>
 
         <div class="filter__list">
-            <v-list lines="one">
-                <v-list-item
+            <v-list 
+                v-model="selectedFilterData"
+                lines="one"
+                :items="filterData"
+                @update:selected="filterOut">
+                <!--<v-list-item
                     v-for="(data, dataIndex) in filterData"
                     :key="dataIndex"
-                    v-model="selectedId"
+                    
                     :title="data.title"
                     :class="selectedId === data.id ? 'filter__list__selected' : ''"
-                    @click="filterOut(data.id)"/>
+                    @click="filterOut(data.id)"/>-->
             </v-list>
         </div>
     </div>
@@ -26,23 +31,14 @@
 
 <script setup lang="ts">
     import type { Brand } from '~/types'
-    const selectedId = ref(0)
 
     const props = defineProps<{ filterData: Brand[]}>();
     const emit = defineEmits(["selectedFilter"]);
 
-    const selectedFilterData = computed({
-        get() {
-            return props.filterData[selectedId.value];
-        },
-        set(brand: Brand) {
-            filterOut(brand.id);
-        }
-    });
+    const selectedFilterData = ref(props.filterData[0]);
 
-    const filterOut = (id: number) => {
-        emit('selectedFilter', id); 
-        selectedId.value = id;
+    const filterOut = () => {
+        emit('selectedFilter', selectedFilterData.value.id); 
     }
 </script>
 

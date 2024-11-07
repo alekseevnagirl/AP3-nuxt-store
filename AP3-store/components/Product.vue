@@ -1,6 +1,5 @@
 <template>
     <div 
-        :id="productDataId"
         class="product__wrapper">
         <v-card>
             <v-img
@@ -34,12 +33,8 @@
 
     const props = defineProps<{ productData: Product}>();
 
-    const productDataId = computed(() => {
-        return 'product' + props.productData?.id
-    })
-
     const subtitle = computed(() => {
-        const price = usePrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
+        const price = getPrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
         return `${props.productData.brandName}\n${price}`;
     })
     
@@ -52,8 +47,7 @@
 
 <style scoped lang="scss">
     .product__wrapper {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 5px;
         padding: 5px;
         border: 1px solid #fff;

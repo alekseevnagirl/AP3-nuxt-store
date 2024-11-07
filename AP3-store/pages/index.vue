@@ -9,8 +9,8 @@
             <p class="catalog__title">Catalog</p>
             <div class="catalog__items">
                 <div
-                    v-for="(product, productId) in products" 
-                    :key="productId" 
+                    v-for="product in products" 
+                    :key="product.sku" 
                     class="catalog__item">
                     <Product :product-data="product"/>
                 </div>
