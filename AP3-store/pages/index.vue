@@ -3,7 +3,7 @@
         <Filter
             :filter-data="brandsStore.brands"
             class="catalog__filters"
-            @selectedFilter="selectedFilter"/>
+            @selected-filter="selectedFilter"/>
 
         <div class="catalog__items__wrapper">
             <p class="catalog__title">Catalog</p>

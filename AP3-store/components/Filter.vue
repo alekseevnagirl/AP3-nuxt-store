@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
-    import type { Product, Brand } from '~/types'
+    import type { Brand } from '~/types'
     const selectedId = ref(0)
 
-    const props = defineProps<{ filterData: Product[]}>();
+    const props = defineProps<{ filterData: Brand[]}>();
     const emit = defineEmits(["selectedFilter"]);
 
     const selectedFilterData = computed({
