@@ -18,6 +18,8 @@ export interface Product {
     brand: number;
     quantity: number;
     brandName: string;
+    configurable_options?: OptionList[];
+    variants?: Variant[];
 }
 
 export interface Cart {
@@ -36,14 +38,28 @@ export interface Cart {
 }
 
 export interface OptionList {
-    attribute_id: number,
-    attribute_code: string,
-    label: string,
-    values: OptionItem
+    attribute_id: number;
+    attribute_code: string;
+    label: string;
+    values: OptionItem[];
 }
 
 export interface OptionItem {
-    label: string,
-    value_index: number,
-    value: string
+    label: string;
+    value_index: number;
+    value: string;
+}
+
+export interface Variant {
+    attributes: VariantAttribute[];
+    product: {
+        id: number;
+        sku: string;
+        image: string;
+    };
+}
+
+export interface VariantAttribute {
+    code: string;
+    value_index: number;
 }

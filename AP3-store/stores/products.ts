@@ -9,7 +9,7 @@ export const useProductsStore = defineStore('products', {
     actions: {
         async fetchProducts () {
             try {
-                this.products = await $fetch<Product[]>('/products.json');
+                this.products = await $fetch<Product[]>('/level3/products.json');
                 const brandsStore = useBrandsStore();
                 const brands = brandsStore.brands;
                 this.products.forEach((product: Product) => {

@@ -15,12 +15,15 @@
 
 <script setup lang="ts">
     import type { OptionItem, OptionList } from '~/types'
+
     const props = defineProps<{ optionList: OptionList, isDisabled: boolean }>();
     const optionItems = ref(props.optionList.values);
+    const emit = defineEmits(["chooseOption"]);
 
     const selectedItem = ref();
 
     const chooseOption = (item: OptionItem) => {
+        emit('chooseOption', item, props.optionList.attribute_id); 
         selectedItem.value = item.value_index;
     }
 </script>
