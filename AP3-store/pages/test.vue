@@ -16,6 +16,7 @@
     await useAsyncData('products', () => productsStore.fetchProducts());
 
     const chooseOption = (option: OptionItem, optionId: number) => {
-        const kflf = useOption(option, optionId, productsStore.products[1].variants);
+        const disabledOptions = useOption(option, optionId, productsStore.products[1].variants);
+        console.log(disabledOptions)
     }
 </script>

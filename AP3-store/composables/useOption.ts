@@ -1,12 +1,14 @@
-import type { OptionItem, Variant, VariantAttribute } from '~/types'
+import type { OptionItem, Variant } from '~/types'
 
 export function useOption(option: OptionItem, optionId: number, variants: Variant[]) {
     const selectedItem = option.value_index;
     const availableVariants = useAvailableVariants(selectedItem, variants);
+    const availableOptions = useAvailableOptions(availableVariants, variants, optionId);
+    const disabledOptions = useDisabledOptions(availableOptions);
 
-    console.log(availableVariants)
+    console.log(disabledOptions)
 
     return [
-        selectedItem
+        disabledOptions
     ]
 }
