@@ -34,3 +34,16 @@ export interface Cart {
     quantity: number;
     brandName: string;
 }
+
+export interface OptionList {
+    attribute_id: number,
+    attribute_code: string,
+    label: string,
+    values: OptionItem
+}
+
+export interface OptionItem {
+    label: string,
+    value_index: number,
+    value: string
+}
