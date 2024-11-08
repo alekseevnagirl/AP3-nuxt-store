@@ -13,6 +13,7 @@
     "@nuxt/eslint": "^0.6.1",
     "@pinia/nuxt": "^0.6.1",
     "@vue/runtime-dom": "^3.5.12",
+    "esrun": "^3.2.26",
     "lodash.clonedeep": "^4.5.0",
     "nuxt": "^3.13.2",
     "pinia": "^2.1.7",

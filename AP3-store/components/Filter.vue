@@ -1,30 +1,26 @@
 <template>
     <div>
-        {{ selectedFilterData }}
         <div class="filter__select">
+            {{ selectedFilterData }}
             <v-select
                 v-model="selectedFilterData"
                 :items="filterData"
                 item-text="title"
                 item-value="id"
                 return-object
+                @update:model-value="filterOut"
             />
         </div>
 
         <div class="filter__list">
             <v-list 
                 v-model="selectedFilterData"
-                lines="one"
                 :items="filterData"
-                @update:selected="filterOut">
-                <!--<v-list-item
-                    v-for="(data, dataIndex) in filterData"
-                    :key="dataIndex"
-                    
-                    :title="data.title"
-                    :class="selectedId === data.id ? 'filter__list__selected' : ''"
-                    @click="filterOut(data.id)"/>-->
-            </v-list>
+                item-text="title"
+                item-value="id"
+                @update:selected="filterOut"
+            />
+            
         </div>
     </div>
 </template>
@@ -34,11 +30,10 @@
 
     const props = defineProps<{ filterData: Brand[]}>();
     const emit = defineEmits(["selectedFilter"]);
-
     const selectedFilterData = ref(props.filterData[0]);
 
-    const filterOut = () => {
-        emit('selectedFilter', selectedFilterData.value.id); 
+    function filterOut(selectedIds: unknown) {
+        emit('selectedFilter', (selectedIds as number[])[0]); 
     }
 </script>
 
@@ -46,11 +41,11 @@
     .filter__select {
         display: none;
     }
-    .filter__list {
-        display: block;
-    }
     .filter__list__selected {
         text-decoration: underline;
+    }
+    .filter__list {
+        display: block;
     }
     @media(max-width: 768px) {
         .filter__select {
