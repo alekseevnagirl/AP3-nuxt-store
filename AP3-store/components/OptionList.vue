@@ -23,7 +23,7 @@
     const selectedItem = ref();
 
     const chooseOption = (item: OptionItem) => {
-        emit('chooseOption', item, props.optionList.attribute_id); 
+        emit('chooseOption', item, props.optionList.attribute_code); 
         selectedItem.value = item.value_index;
     }
 </script>
