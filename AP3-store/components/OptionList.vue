@@ -1,5 +1,4 @@
 <template>
-    {{ optionList.label }}
     <div class="OptionList">
         <div 
             v-for="(item, itemId) in optionItems"
@@ -29,7 +28,8 @@
 <style scoped lang="scss">
     .OptionList {
         display: grid;
-        grid-template-columns: repeat(auto-fit, 40px);
+        grid-template-columns: repeat(auto-fit, 35px);
         gap: 5px;
+        margin: 5px 0;
     }
 </style>

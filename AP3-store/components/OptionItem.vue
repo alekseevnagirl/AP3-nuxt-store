@@ -1,8 +1,7 @@
 <template>
     <div 
-        :style="`background-color: ${optionData.value};`" 
         class="optionItem"
-        :class="isSelected ? 'optionItem__selected' : ''">
+        :style="getOptionStyle">
         <div 
             v-if="optionType === 'size'"
             class="optionItem__label">
@@ -17,12 +16,21 @@
 
 <script setup lang="ts">
     import type { OptionItem } from '~/types'
+
     const props = defineProps<{ 
         optionData:  OptionItem, 
         isSelected: boolean, 
         optionType: string, 
         isDisabled: boolean 
     }>();
+
+    const getOptionStyle = computed(() => {
+        return {
+            'background-color': props.optionData.value,
+            'border': props.isSelected ? '2px solid #ffd814': '1px solid #000',
+            'pointer-events': props.isDisabled ? 'none' : 'auto'
+        }
+    })
 </script>
 
 <style scoped lang="scss">
@@ -36,9 +44,6 @@
     .optionItem:hover {
         cursor: pointer;
     }
-    .optionItem__selected {
-        border: 2px solid #ffd814;
-    }
     .optionItem__label {
         position: absolute;
         width: 100%;
@@ -47,6 +52,5 @@
     .optionItem__disabled {
         color: #8B0000;
         transform: scale(3);
-        //display: none;
     }
 </style>
