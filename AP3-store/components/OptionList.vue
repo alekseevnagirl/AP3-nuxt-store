@@ -7,6 +7,8 @@
             <OptionItem 
                 :option-data="item"
                 :is-selected="selectedItem === item.value_index"
+                :option-type="optionList.attribute_code"
+                :is-disabled="isDisabled"
                 @click="chooseOption(item)"/>
         </div>
     </div>
@@ -14,7 +16,7 @@
 
 <script setup lang="ts">
     import type { OptionItem, OptionList } from '~/types'
-    const props = defineProps<{ optionList: OptionList }>();
+    const props = defineProps<{ optionList: OptionList, isDisabled: boolean }>();
     const optionItems = ref(props.optionList.values);
 
     const selectedItem = ref();
