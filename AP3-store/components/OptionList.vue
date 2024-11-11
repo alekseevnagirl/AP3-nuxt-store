@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-    import type { OptionItem, OptionList } from '~/types'
+    import type { OptionItem, OptionList, DisabledOption } from '~/types'
 
-    const props = defineProps<{ optionList: OptionList, disabledValues: string[], selectedValues: string[] }>();
+    const props = defineProps<{ optionList: OptionList, disabledValues: DisabledOption[], selectedValues: string[] }>();
     const optionItems = ref(props.optionList.values);
     const emit = defineEmits(["chooseOption"]);
     const selectedItem = ref();

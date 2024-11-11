@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-    import type { OptionItem, OptionList } from '~/types'
-    const disabledValues = ref([] as string[]);
+    import type { OptionItem, OptionList, DisabledOption } from '~/types'
+    const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
 
     const configurable_options: OptionList[] = [
@@ -137,18 +137,23 @@
         const hasSameItem = selectedItems.value.some((item) => item === newItem);
         const hasSameType = selectedItems.value.some((item) => item.split(' ')[0] === optionCode);
 
+        const disabledValue = {} as DisabledOption;
+        disabledValue.code = optionCode;
+
         if (hasSameItem) {
             selectedItems.value = selectedItems.value.filter((value) => value !== newItem);
-            disabledValues.value = []; // здесь починить
+            disabledValue.data = []; // здесь починить
         }
         else if (hasSameType) {
             selectedItems.value = selectedItems.value.filter((value) => value.split(' ')[0] !== optionCode);
             selectedItems.value = selectedItems.value.concat(newItem);
-            disabledValues.value = useOption(option, optionCode, variants, configurable_options) || []; // здесь починить
+            disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
+            disabledValues.value = disabledValues.value.concat(disabledValue);
         }
         else { 
             selectedItems.value = selectedItems.value.concat(newItem);
-            disabledValues.value = disabledValues.value.concat(useOption(option, optionCode, variants, configurable_options) || []);
+            disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
+            disabledValues.value = disabledValues.value.concat(disabledValue);
         }
         console.log('dis34567890', disabledValues.value)
     }

@@ -65,3 +65,8 @@ export interface VariantAttribute {
     code: string;
     value_index: number;
 }
+
+export interface DisabledOption {
+    code: string;
+    data: string[]
+}

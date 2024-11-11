@@ -16,20 +16,22 @@
 </template>
 
 <script setup lang="ts">
-    import type { OptionItem } from '~/types'
+    import type { OptionItem, DisabledOption } from '~/types'
 
     const props = defineProps<{ 
         optionData:  OptionItem, 
         selectedValues: string[], 
         optionType: string, 
-        disabledValues: string[] 
+        disabledValues: DisabledOption[] 
     }>();
 
     const isDisabled = computed(() => {
         return props.disabledValues.find((value) => {
-            return value.split(' ')[0] === props.optionType
-                && value.split(' ')[1] === props.optionData.value_index.toString()
-        }) != undefined 
+            return value.data.find((item) => {
+                return item.split(' ')[0] === props.optionType
+                    && item.split(' ')[1] === props.optionData.value_index.toString()
+            }) !== undefined;
+        }) !== undefined
     })
 
     const isSelected = computed(() => {
