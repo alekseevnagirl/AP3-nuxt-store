@@ -7,7 +7,8 @@
             class="optionItem__label">
             {{ optionData.label }}
         </div>
-        <div v-if="isDisabled"
+        <div 
+            v-if="isDisabled"
             class="optionItem__disabled">
             ×
         </div>
@@ -19,16 +20,30 @@
 
     const props = defineProps<{ 
         optionData:  OptionItem, 
-        isSelected: boolean, 
+        selectedValues: string[], 
         optionType: string, 
-        isDisabled: boolean 
+        disabledValues: string[] 
     }>();
+
+    const isDisabled = computed(() => {
+        return props.disabledValues.find((value) => {
+            return value.split(' ')[0] === props.optionType
+                && value.split(' ')[1] === props.optionData.value_index.toString()
+        }) != undefined 
+    })
+
+    const isSelected = computed(() => {
+        return props.selectedValues.find((value) => {
+            return value.split(' ')[0] === props.optionType
+                && value.split(' ')[1] === props.optionData.value_index.toString()
+        }) != undefined
+    })
 
     const getOptionStyle = computed(() => {
         return {
             'background-color': props.optionData.value,
-            'border': props.isSelected ? '2px solid #ffd814': '1px solid #000',
-            'pointer-events': props.isDisabled ? 'none' : 'auto'
+            'border': isSelected.value ? '2px solid #ffd814': '1px solid #000',
+            'pointer-events': isDisabled.value ? 'none' : 'auto'
         }
     })
 </script>

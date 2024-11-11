@@ -1,4 +1,4 @@
-<template> 
+<template>
     <div v-if="configurable_options.length">
         <div 
             v-for="item in configurable_options"
@@ -6,6 +6,7 @@
             <OptionList 
                 :option-list="item"
                 :disabled-values="disabledValues"
+                :selected-values="selectedItems"
                 @choose-option="chooseOption"/>
         </div>
     </div>
@@ -14,6 +15,7 @@
 <script setup lang="ts">
     import type { OptionItem, OptionList } from '~/types'
     const disabledValues = ref([] as string[]);
+    const selectedItems = ref([] as string[]);
 
     const configurable_options: OptionList[] = [
       {
@@ -129,16 +131,18 @@
       }
     ]
 
-    const chooseOption = (option: OptionItem, optionCode: string) => {
-        disabledValues.value = [] as string[];
-        const {
-            availableVariants,
-            availableOptions,
-            disabledOptions
-        } = useOption(option, optionCode, variants, configurable_options);
-        disabledOptions.forEach((option) => {
-            if (optionCode !== option.split(' ')[0])
-                disabledValues.value = disabledValues.value.concat(option.split(' ')[1])
-        })
+    const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
+        const newItem = `${optionCode} ${selectedItem}`;
+        const hasSameItem = selectedItems.value.some((item) => item === newItem);
+        const hasSameType = selectedItems.value.some((item) => item.split(' ')[0] === optionCode);
+
+        if (hasSameItem) selectedItems.value = selectedItems.value.filter((value) => value !== newItem)
+        else if (hasSameType) {
+            selectedItems.value = selectedItems.value.filter((value) => value.split(' ')[0] !== optionCode);
+            selectedItems.value = selectedItems.value.concat(newItem);
+        }
+        else selectedItems.value = selectedItems.value.concat(newItem);
+
+        disabledValues.value = useOption(option, optionCode, variants, configurable_options) || [];
     }
 </script>

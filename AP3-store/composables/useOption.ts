@@ -6,9 +6,5 @@ export function useOption(option: OptionItem, optionCode: string, variants: Vari
     const availableOptions = useAvailableOptions(availableVariants, optionCode, allOptions);
     const disabledOptions = useDisabledOptions(availableOptions, allOptions);
 
-    return {
-        availableVariants,
-        availableOptions,
-        disabledOptions
-    }
+    return disabledOptions
 }
