@@ -11,6 +11,9 @@ export function useAvailableOptions(availableVariants: Variant[], optionCode: st
             })
         })
     });
+    availableOptions = availableOptions.filter((value, index, self) => {
+        return self.indexOf(value) === index;
+    });
 
     return availableOptions
 }

@@ -38,16 +38,18 @@ export interface Cart {
 }
 
 export interface OptionList {
+    id?: number
     attribute_id: number;
     attribute_code: string;
     label: string;
     values: OptionItem[];
+    position?: number
 }
 
 export interface OptionItem {
     label: string;
     value_index: number;
-    value: string;
+    value: string | number;
 }
 
 export interface Variant {
