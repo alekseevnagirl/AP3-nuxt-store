@@ -142,12 +142,13 @@
 
         if (hasSameItem) {
             selectedItems.value = selectedItems.value.filter((value) => value !== newItem);
-            disabledValue.data = []; // здесь починить
+            disabledValues.value = disabledValues.value.filter((value) => value.code !== optionCode);
         }
         else if (hasSameType) {
             selectedItems.value = selectedItems.value.filter((value) => value.split(' ')[0] !== optionCode);
             selectedItems.value = selectedItems.value.concat(newItem);
             disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
+            disabledValues.value = disabledValues.value.filter((value) => value.code !== optionCode);
             disabledValues.value = disabledValues.value.concat(disabledValue);
         }
         else { 
