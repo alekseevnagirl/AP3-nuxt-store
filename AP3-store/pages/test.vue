@@ -132,7 +132,6 @@
     ]
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
-        // разбираемся с выбранными значениями
         const newItem = `${optionCode} ${selectedItem}`;
         const hasSameItem = selectedItems.value.some((item) => item === newItem);
         const hasSameType = selectedItems.value.some((item) => item.split(' ')[0] === optionCode);
@@ -156,6 +155,5 @@
             disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
             disabledValues.value = disabledValues.value.concat(disabledValue);
         }
-        console.log('dis34567890', disabledValues.value)
     }
 </script>

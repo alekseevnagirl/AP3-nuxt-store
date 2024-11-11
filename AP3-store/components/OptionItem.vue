@@ -28,24 +28,22 @@
     const isDisabled = computed(() => {
         return props.disabledValues.find((value) => {
             return value.data.find((item) => {
-                return item.split(' ')[0] === props.optionType
-                    && item.split(' ')[1] === props.optionData.value_index.toString()
+                return item === `${props.optionType} ${props.optionData.value_index}`
             }) !== undefined;
         }) !== undefined
     })
 
     const isSelected = computed(() => {
         return props.selectedValues.find((value) => {
-            return value.split(' ')[0] === props.optionType
-                && value.split(' ')[1] === props.optionData.value_index.toString()
+            return value === `${props.optionType} ${props.optionData.value_index}`
         }) != undefined
     })
 
     const getOptionStyle = computed(() => {
         return {
-            'background-color': props.optionData.value,
-            'border': isSelected.value ? '2px solid #ffd814': '1px solid #000',
-            'pointer-events': isDisabled.value ? 'none' : 'auto'
+            backgroundColor: props.optionType === 'color' ? props.optionData.value+'' : '#fff',
+            border: isSelected.value ? '2px solid #ffd814': '1px solid #000',
+            pointerEvents: isDisabled.value ? 'none' : 'auto'
         }
     })
 </script>
