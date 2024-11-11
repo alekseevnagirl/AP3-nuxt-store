@@ -132,17 +132,24 @@
     ]
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
+        // разбираемся с выбранными значениями
         const newItem = `${optionCode} ${selectedItem}`;
         const hasSameItem = selectedItems.value.some((item) => item === newItem);
         const hasSameType = selectedItems.value.some((item) => item.split(' ')[0] === optionCode);
 
-        if (hasSameItem) selectedItems.value = selectedItems.value.filter((value) => value !== newItem)
+        if (hasSameItem) {
+            selectedItems.value = selectedItems.value.filter((value) => value !== newItem);
+            disabledValues.value = []; // здесь починить
+        }
         else if (hasSameType) {
             selectedItems.value = selectedItems.value.filter((value) => value.split(' ')[0] !== optionCode);
             selectedItems.value = selectedItems.value.concat(newItem);
+            disabledValues.value = useOption(option, optionCode, variants, configurable_options) || []; // здесь починить
         }
-        else selectedItems.value = selectedItems.value.concat(newItem);
-
-        disabledValues.value = useOption(option, optionCode, variants, configurable_options) || [];
+        else { 
+            selectedItems.value = selectedItems.value.concat(newItem);
+            disabledValues.value = disabledValues.value.concat(useOption(option, optionCode, variants, configurable_options) || []);
+        }
+        console.log('dis34567890', disabledValues.value)
     }
 </script>
