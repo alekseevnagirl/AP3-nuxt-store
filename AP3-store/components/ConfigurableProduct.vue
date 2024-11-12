@@ -20,17 +20,17 @@
 </template>
 
 <script setup lang="ts">
-    import type { Product, DisabledOption } from '~/types';
+    import type { Product, DisabledOption, OptionItem } from '~/types';
 
     const props = defineProps<{ productData: Product}>();
     const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
-    const imageSrc= ref(props.productData.image);
+    const imageSrc = ref('');
     const isDisabledAddButton = ref(true)
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
         [ selectedItems.value, disabledValues.value, imageSrc.value, isDisabledAddButton.value ] = 
-            useSelectedOption(props.productData.image, option, optionCode, props.productData.variants, props.productData.configurable_options, selectedItem, selectedItems.value, disabledValues.value);
+            useSelectedOption(imageSrc.value, option, optionCode, props.productData.variants, props.productData.configurable_options, selectedItem, selectedItems.value, disabledValues.value);
     }
 </script>
 
