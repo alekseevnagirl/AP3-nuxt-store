@@ -3,6 +3,7 @@ import type { OptionItem, Variant, OptionList, DisabledOption } from '~/types'
 export function useSelectedOption(defaultImage: string, option: OptionItem, optionCode: string, variants: Variant[], configurable_options: OptionList[], selectedItem: string,  selectedItems: string[], disabledValues: DisabledOption[]) {
     const newItem = `${optionCode} ${selectedItem}`;
     let imageSrc = defaultImage;
+    let isDisabledAddButton = true;
 
     const hasSameItem = selectedItems.some((item) => item === newItem);
     const hasSameType = selectedItems.some((item) => item.split(' ')[0] === optionCode);
@@ -27,9 +28,13 @@ export function useSelectedOption(defaultImage: string, option: OptionItem, opti
         disabledValues = disabledValues.concat(disabledValue);
     }
 
+    if (configurable_options.length === selectedItems.length) isDisabledAddButton = false;
+    else isDisabledAddButton = true;
+
     return [
         selectedItems,
         disabledValues,
-        imageSrc
+        imageSrc,
+        isDisabledAddButton
     ]
 }

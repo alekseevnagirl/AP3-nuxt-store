@@ -2,7 +2,7 @@
     <SimpleProduct 
         :product-data="productData"
         :image-src="imageSrc"
-        :is-disabled="isDisabled">
+        :is-disabled="isDisabledAddButton">
         <div class="configurableProduct__wrapper">
             <div
                 v-for="(option, optionId) in productData.configurable_options"
@@ -26,10 +26,10 @@
     const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
     const imageSrc= ref('/images/conf/default.png');
-    const isDisabled = ref(true)
+    const isDisabledAddButton = ref(true)
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
-        [ selectedItems.value, disabledValues.value, imageSrc.value ] = 
+        [ selectedItems.value, disabledValues.value, imageSrc.value, isDisabledAddButton.value ] = 
             useSelectedOption('/images/conf/default.png', option, optionCode, props.productData.variants, props.productData.configurable_options, selectedItem, selectedItems.value, disabledValues.value);
     }
 </script>
