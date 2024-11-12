@@ -31,7 +31,7 @@
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types';
 
-    const props = defineProps<{ productData: Product, isDisabled: boolean, imageSrc: string}>();
+    const props = defineProps<{ productData: Product, isDisabled?: boolean, imageSrc?: string}>();
 
     const subtitle = computed(() => {
         const price = getPrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
