@@ -1,7 +1,9 @@
 <template>
-    <div 
+    <v-btn 
         class="optionItem"
-        :style="getOptionStyle">
+        :style="getOptionStyle"
+        size="50px"
+        :disabled="isDisabled">
         <div 
             v-if="optionType === 'size'"
             class="optionItem__label">
@@ -12,7 +14,7 @@
             class="optionItem__disabled">
             ×
         </div>
-    </div>
+    </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -43,14 +45,14 @@
         return {
             backgroundColor: props.optionType === 'color' ? props.optionData.value+'' : '#fff',
             border: isSelected.value ? '2px solid #ffd814': '1px solid #000',
-            pointerEvents: isDisabled.value ? 'none' : 'auto'
+            //pointerEvents: isDisabled.value ? 'none' : 'auto'
         }
     })
 </script>
 
 <style scoped lang="scss">
     .optionItem {
-        height: 20px; 
+        height: 25px !important;
         border: 1px solid #000;
         text-align: center;
         font-size: 14px;

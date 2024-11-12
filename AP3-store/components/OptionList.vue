@@ -30,7 +30,7 @@
 <style scoped lang="scss">
     .OptionList {
         display: grid;
-        grid-template-columns: repeat(auto-fit, 35px);
+        grid-template-columns: repeat(auto-fit, 50px);
         gap: 5px;
         margin: 5px 0;
     }
