@@ -17,7 +17,9 @@
     import type { OptionItem, OptionList, DisabledOption } from '~/types'
 
     const props = defineProps<{ optionList: OptionList, disabledValues: DisabledOption[], selectedValues: string[] }>();
-    const optionItems = ref(props.optionList.values);
+    const optionItems = computed(() => { 
+        return props.optionList.values
+    });
     const emit = defineEmits(["chooseOption"]);
     const selectedItem = ref();
 

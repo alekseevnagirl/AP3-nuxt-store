@@ -19,6 +19,7 @@
         <v-card-actions>
             <v-btn 
                 class="product__button"
+                :disabled="isDisabled"
                 @click="addProduct">
                 Добавить
             </v-btn>
@@ -30,7 +31,7 @@
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types';
 
-    const props = defineProps<{ productData: Product}>();
+    const props = defineProps<{ productData: Product, isDisabled: boolean}>();
 
     const subtitle = computed(() => {
         const price = getPrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
