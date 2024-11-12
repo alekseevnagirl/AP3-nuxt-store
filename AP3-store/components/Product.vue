@@ -5,7 +5,9 @@
             v-if="productData.type === 'simple'"
             :product-data="productData"/>
         
-        <ConfigurableProduct v-else/>
+        <ConfigurableProduct  
+            v-if="productData.type === 'configurable'" 
+            :product-data="productData"/>
     </div>
 </template>
 

@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
     import deepClone from 'lodash.clonedeep';
-    import type { Product } from '~/types'
+    import type { Product } from '~/types';
 
     const props = defineProps<{ productData: Product}>();
 
