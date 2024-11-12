@@ -6,5 +6,10 @@ export function useDisabledData(option: OptionItem, optionCode: string, variants
     const availableOptions = useAvailableOptions(availableVariants, optionCode, allOptions);
     const disabledOptions = useDisabledOptions(availableOptions, allOptions);
 
-    return disabledOptions
+    const imageSrc = availableVariants[0]?.product?.image;
+
+    return [
+        disabledOptions,
+        imageSrc
+    ]
 }

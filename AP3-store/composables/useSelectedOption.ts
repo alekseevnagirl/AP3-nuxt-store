@@ -1,8 +1,8 @@
 import type { OptionItem, Variant, OptionList, DisabledOption } from '~/types'
 
-export function useSelectedOption(option: OptionItem, optionCode: string, variants: Variant[], configurable_options: OptionList[], selectedItem: string,  selectedItems: string[], disabledValues: DisabledOption[]) {
+export function useSelectedOption(defaultImage: string, option: OptionItem, optionCode: string, variants: Variant[], configurable_options: OptionList[], selectedItem: string,  selectedItems: string[], disabledValues: DisabledOption[]) {
     const newItem = `${optionCode} ${selectedItem}`;
-    const imageSrc = '';
+    let imageSrc = defaultImage;
 
     const hasSameItem = selectedItems.some((item) => item === newItem);
     const hasSameType = selectedItems.some((item) => item.split(' ')[0] === optionCode);
@@ -17,13 +17,13 @@ export function useSelectedOption(option: OptionItem, optionCode: string, varian
     else if (hasSameType) {
         selectedItems = selectedItems.filter((value) => value.split(' ')[0] !== optionCode);
         selectedItems = selectedItems.concat(newItem);
-        disabledValue.data = useDisabledData(option, optionCode, variants, configurable_options) || [];
+        [ disabledValue.data, imageSrc ] = useDisabledData(option, optionCode, variants, configurable_options) || [];
         disabledValues = disabledValues.filter((value) => value.code !== optionCode);
         disabledValues = disabledValues.concat(disabledValue);
     }
     else { 
         selectedItems = selectedItems.concat(newItem);
-        disabledValue.data = useDisabledData(option, optionCode, variants, configurable_options) || [];
+        [ disabledValue.data, imageSrc ] = useDisabledData(option, optionCode, variants, configurable_options) || [];
         disabledValues = disabledValues.concat(disabledValue);
     }
 

@@ -19,7 +19,7 @@
     import type { OptionItem, OptionList, DisabledOption } from '~/types'
     const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
-    const imageSrc= ref('')
+    const imageSrc= ref('/images/conf/default.png')
 
     const configurable_options: OptionList[] = [
       {
@@ -137,6 +137,6 @@
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
         [ selectedItems.value, disabledValues.value, imageSrc.value ] = 
-            useSelectedOption(option, optionCode, variants, configurable_options, selectedItem, selectedItems.value, disabledValues.value);
+            useSelectedOption('/images/conf/default.png', option, optionCode, variants, configurable_options, selectedItem, selectedItems.value, disabledValues.value);
     }
 </script>
