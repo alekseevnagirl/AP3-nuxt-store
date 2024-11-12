@@ -1,5 +1,8 @@
 <template>
     <div v-if="configurable_options.length">
+        <img 
+            :src="imageSrc" 
+            width="100px">
         <div 
             v-for="item in configurable_options"
             :key="item.attribute_id">
@@ -16,6 +19,7 @@
     import type { OptionItem, OptionList, DisabledOption } from '~/types'
     const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
+    const imageSrc="images/1.png"
 
     const configurable_options: OptionList[] = [
       {
@@ -132,28 +136,7 @@
     ]
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
-        const newItem = `${optionCode} ${selectedItem}`;
-        const hasSameItem = selectedItems.value.some((item) => item === newItem);
-        const hasSameType = selectedItems.value.some((item) => item.split(' ')[0] === optionCode);
-
-        const disabledValue = {} as DisabledOption;
-        disabledValue.code = optionCode;
-
-        if (hasSameItem) {
-            selectedItems.value = selectedItems.value.filter((value) => value !== newItem);
-            disabledValues.value = disabledValues.value.filter((value) => value.code !== optionCode);
-        }
-        else if (hasSameType) {
-            selectedItems.value = selectedItems.value.filter((value) => value.split(' ')[0] !== optionCode);
-            selectedItems.value = selectedItems.value.concat(newItem);
-            disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
-            disabledValues.value = disabledValues.value.filter((value) => value.code !== optionCode);
-            disabledValues.value = disabledValues.value.concat(disabledValue);
-        }
-        else { 
-            selectedItems.value = selectedItems.value.concat(newItem);
-            disabledValue.data = useOption(option, optionCode, variants, configurable_options) || [];
-            disabledValues.value = disabledValues.value.concat(disabledValue);
-        }
+        [ selectedItems.value, disabledValues.value ] = 
+            useSelectedOption(option, optionCode, variants, configurable_options, selectedItem, selectedItems.value, disabledValues.value);
     }
 </script>
