@@ -3,7 +3,7 @@
         <v-img
             :width="250"
             cover
-            :src="imageSrc || productData.image"
+            :src="productData.image"
         />
 
         <v-card-title>
@@ -14,12 +14,9 @@
             {{ subtitle }}
         </v-card-subtitle>
 
-        <slot/>
-
         <v-card-actions>
             <v-btn 
                 class="product__button"
-                :disabled="isDisabled"
                 @click="addProduct">
                 Добавить
             </v-btn>
@@ -31,7 +28,7 @@
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types';
 
-    const props = defineProps<{ productData: Product, isDisabled?: boolean, imageSrc?: string}>();
+    const props = defineProps<{ productData: Product }>();
 
     const subtitle = computed(() => {
         const price = getPrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);
