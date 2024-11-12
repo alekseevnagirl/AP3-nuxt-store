@@ -3,7 +3,7 @@
         <v-img
             :width="250"
             cover
-            :src="productData.image"
+            :src="imageSrc || productData.image"
         />
 
         <v-card-title>
@@ -31,7 +31,7 @@
     import deepClone from 'lodash.clonedeep';
     import type { Product } from '~/types';
 
-    const props = defineProps<{ productData: Product, isDisabled: boolean}>();
+    const props = defineProps<{ productData: Product, isDisabled: boolean, imageSrc: string}>();
 
     const subtitle = computed(() => {
         const price = getPrice(props.productData?.regular_price?.value, props.productData?.regular_price?.currency);

@@ -25,12 +25,12 @@
     const props = defineProps<{ productData: Product}>();
     const disabledValues = ref([] as DisabledOption[]);
     const selectedItems = ref([] as string[]);
-    const imageSrc= ref('/images/conf/default.png');
+    const imageSrc= ref(props.productData.image);
     const isDisabledAddButton = ref(true)
 
     const chooseOption = (option: OptionItem, optionCode: string, selectedItem: string) => {
         [ selectedItems.value, disabledValues.value, imageSrc.value, isDisabledAddButton.value ] = 
-            useSelectedOption('/images/conf/default.png', option, optionCode, props.productData.variants, props.productData.configurable_options, selectedItem, selectedItems.value, disabledValues.value);
+            useSelectedOption(props.productData.image, option, optionCode, props.productData.variants, props.productData.configurable_options, selectedItem, selectedItems.value, disabledValues.value);
     }
 </script>
 
