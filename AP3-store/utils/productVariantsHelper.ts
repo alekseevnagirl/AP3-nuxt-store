@@ -58,21 +58,6 @@ function getAvailableVariants(selectedItem: number, variants: Variant[]) {
 }
 
 function getSelectedVariant(availableVariants: Variant[], selectedItems: string[], allOptions: OptionList[]) {
-
-    // if (allOptions.length === selectedItems.length) {
-    //     const selectedItemsObj = selectedItems.reduce((acc, item) => {
-    //         const [attributeCode, attributeValue] = item.split(' ')
-    //         return {
-    //             ...acc,
-    //             [attributeCode]: attributeValue
-    //         }
-    //     }, {} as Record<string, string>)
-
-    //     return availableVariants.find((variant) => variant.attributes.every(attr => selectedItemsObj[attr.code] === attr.value_index + ''))
-    // }
-
-    // return {}
-
     let selectedVariant = {} as Variant;
 
     if (allOptions.length === selectedItems.length) {
