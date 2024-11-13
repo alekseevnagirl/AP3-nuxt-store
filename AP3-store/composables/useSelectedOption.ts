@@ -35,7 +35,6 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
                 const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
                 currentVariant.value = selectedVariant
-                imageSrc.value = availableVariants[0]?.product?.image || ''
                 _disabledValues = _disabledValues.filter((value) => value.code !== optionCode);
                 _disabledValues = _disabledValues.concat(disabledValue);
             }
@@ -44,17 +43,13 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
                 const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
                 currentVariant.value = selectedVariant
-                imageSrc.value = availableVariants[0]?.product?.image
                 _disabledValues = _disabledValues.concat(disabledValue);
             }
 
             if (configurable_options.length === _selectedItems.length) isDisabledAddButton.value = false;
             else isDisabledAddButton.value = true;
 
-            if (!_selectedItems.find((item) => {
-                return item.split(' ')[0] === 'color'
-            })) imageSrc.value = '';
-
+            imageSrc.value = currentVariant?.value?.product?.image || ''
             selectedItems.value = _selectedItems
             disabledValues.value = _disabledValues
         }

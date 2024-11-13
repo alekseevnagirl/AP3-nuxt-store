@@ -3,7 +3,7 @@
         <v-img
             :width="250"
             cover
-            :src="imageSrc || productData.image"
+            :src="imageSrc === '' ? productData.image : imageSrc"
         />
 
         <v-card-title>

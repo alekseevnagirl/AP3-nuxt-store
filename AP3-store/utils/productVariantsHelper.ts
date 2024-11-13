@@ -66,7 +66,6 @@ function getSelectedVariant(availableVariants: Variant[], selectedItems: string[
             variant.attributes.forEach((attribute) => { // map
                 currentVariant = currentVariant.concat(`${attribute.code} ${attribute.value_index}`)
             })
-            console.log(currentVariant, selectedItems)
             if (arraysEqual(currentVariant, selectedItems)) selectedVariant = variant
 
         })
