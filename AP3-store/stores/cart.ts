@@ -7,12 +7,19 @@ export const useCartStore = defineStore('alerts', {
         }
     },
     actions: {
-        addToCart(product: Product) { 
+        addToCart(product: Product) {
             const isProductInCart = this.cart.some((item) => {
-                if (item.id === product.id) { 
-                    item.quantity = item.quantity + 1;
+                if (item.type === 'configurable' 
+                    && item.id === product.id 
+                    && item?.variant?.product?.id === product?.variant?.product?.id) {
+                    item.quantity += 1;
                     return true;
-                }
+                  }
+                  else if (item.type === 'simple' && item.id === product.id) {
+                    item.quantity += 1;
+                    return true;
+                  } 
+                  else return false;
             })
             if (!isProductInCart) 
                 this.cart.push(product)

@@ -16,6 +16,11 @@
                         {{ cartItemData.brandName }} / {{ cartItemData.title }}
                     </div>
                     <div 
+                        v-for="(attribute, attributeId) in cartItemData.variant?.attributes"
+                        :key="attributeId">
+                        {{ attribute.code }}
+                    </div>
+                    <div 
                         v-if="cartItemData.variant"
                         class="cartItem__color__size">
                         Color: {{ cartItemData?.variant?.product?.sku.split('-')[1] }}

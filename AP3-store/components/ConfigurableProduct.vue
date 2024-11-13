@@ -58,8 +58,10 @@
 
     const addProduct = () => {
         const currentItem = deepClone(props.productData);
+        delete currentItem.configurable_options;
+        delete currentItem.variants;
+        currentItem.variant = currentVariant.value;
         const cartStore = useCartStore()
-        console.log(currentVariant.value)
         cartStore.addToCart(currentItem);
     }
 </script>

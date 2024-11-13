@@ -19,7 +19,7 @@ export interface Product {
     quantity: number;
     brandName: string;
     configurable_options?: OptionList[];
-    variants?: Variant[];
+    variant?: Variant;
 }
 
 export interface Cart {
@@ -35,6 +35,7 @@ export interface Cart {
     brand: number;
     quantity: number;
     brandName: string;
+    variant?: Variant;
 }
 
 export interface OptionList {
