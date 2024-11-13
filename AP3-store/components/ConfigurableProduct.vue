@@ -47,6 +47,7 @@
         selectedItems,
         imageSrc,
         isDisabledAddButton,
+        currentVariant,
         chooseOption,
     } = useSelectedOption(props.productData.variants || [], props.productData.configurable_options || []);
 
@@ -56,9 +57,10 @@
     })
 
     const addProduct = () => {
-        const currentVariant = deepClone(props.productData);
+        const currentItem = deepClone(props.productData);
         const cartStore = useCartStore()
-        cartStore.addToCart(currentVariant);
+        console.log(currentVariant.value)
+        cartStore.addToCart(currentItem);
     }
 </script>
 

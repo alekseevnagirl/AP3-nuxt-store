@@ -5,12 +5,14 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
     const selectedItems = ref([] as string[]);
     const imageSrc = ref('');
     const isDisabledAddButton = ref(true)
+    const currentVariant = ref({} as Variant)
 
     return {
         disabledValues,
         selectedItems,
         imageSrc,
         isDisabledAddButton,
+        currentVariant,
         chooseOption(option: OptionItem, optionCode: string, selectedItem: string) {
             const newItem = `${optionCode} ${selectedItem}`;
             
@@ -30,16 +32,18 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
             else if (hasSameType) {
                 _selectedItems = _selectedItems.filter((value) => value.split(' ')[0] !== optionCode);
                 _selectedItems = _selectedItems.concat(newItem);
-                const { disabledOptions, availableVariants } = productVariantsHelper(option, optionCode, variants, configurable_options);
+                const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
+                currentVariant.value = selectedVariant
                 imageSrc.value = availableVariants[0]?.product?.image || ''
                 _disabledValues = _disabledValues.filter((value) => value.code !== optionCode);
                 _disabledValues = _disabledValues.concat(disabledValue);
             }
             else { 
                 _selectedItems = _selectedItems.concat(newItem);
-                const { disabledOptions, availableVariants } = productVariantsHelper(option, optionCode, variants, configurable_options);
+                const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
+                currentVariant.value = selectedVariant
                 imageSrc.value = availableVariants[0]?.product?.image
                 _disabledValues = _disabledValues.concat(disabledValue);
             }

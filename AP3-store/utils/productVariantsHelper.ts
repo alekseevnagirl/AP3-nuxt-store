@@ -1,7 +1,7 @@
 import type { OptionItem, Variant,OptionList, VariantAttribute } from '~/types'
 
 export function productVariantsHelper(
-    option: OptionItem, optionCode: string, variants: Variant[], allOptions: OptionList[]
+    option: OptionItem, optionCode: string, variants: Variant[], allOptions: OptionList[], selectedItems: string[]
 ) {    
 
     const selectedItem = option.value_index;
@@ -13,10 +13,12 @@ export function productVariantsHelper(
     const _option = allOptions.find(item => item.attribute_code === availableAttributeCode)
     const optionValues = _option?.values.filter(({value_index}) => !availableValues.includes(value_index) )
     const disabledOptions = optionValues?.map(({value_index}) => availableAttributeCode + ' ' + value_index) || []
+    const selectedVariant = getSelectedVariant(availableVariants, selectedItems, allOptions);
 
     return {
         availableVariants,
-        disabledOptions
+        disabledOptions,
+        selectedVariant
     }
 }
 
@@ -53,4 +55,49 @@ function getAvailableVariants(selectedItem: number, variants: Variant[]) {
     })
 
     return availableVariants
+}
+
+function getSelectedVariant(availableVariants: Variant[], selectedItems: string[], allOptions: OptionList[]) {
+
+    // if (allOptions.length === selectedItems.length) {
+    //     const selectedItemsObj = selectedItems.reduce((acc, item) => {
+    //         const [attributeCode, attributeValue] = item.split(' ')
+    //         return {
+    //             ...acc,
+    //             [attributeCode]: attributeValue
+    //         }
+    //     }, {} as Record<string, string>)
+
+    //     return availableVariants.find((variant) => variant.attributes.every(attr => selectedItemsObj[attr.code] === attr.value_index + ''))
+    // }
+
+    // return {}
+
+    let selectedVariant = {} as Variant;
+
+    if (allOptions.length === selectedItems.length) {
+        availableVariants.forEach((variant) => {
+            let currentVariant = [] as string[]
+            variant.attributes.forEach((attribute) => { // map
+                currentVariant = currentVariant.concat(`${attribute.code} ${attribute.value_index}`)
+            })
+            console.log(currentVariant, selectedItems)
+            if (arraysEqual(currentVariant, selectedItems)) selectedVariant = variant
+
+        })
+    }
+    return selectedVariant
+}
+
+function arraysEqual(arr1: string[], arr2: string[]): boolean {
+    const sortedArr1 = arr1.slice().sort();
+    const sortedArr2 = arr2.slice().sort();
+
+    for (let i = 0; i < sortedArr1.length; i++) {
+        if (sortedArr1[i] !== sortedArr2[i]) {
+            return false;
+        }
+    }
+
+    return true;
 }
