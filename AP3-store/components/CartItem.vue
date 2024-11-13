@@ -168,7 +168,7 @@
         .cartItem__quantity {
             width: 100px;
         }
-        .cartItem__brand, .cartItem__color__size {
+        .cartItem__brand, .cartItem__attribute {
             padding-left: 0 !important; 
         }
         .cartItem__price{

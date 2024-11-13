@@ -19,6 +19,7 @@ export interface Product {
     quantity: number;
     brandName: string;
     configurable_options?: OptionList[];
+    variants?: Variant[];
     variant?: Variant;
 }
 
