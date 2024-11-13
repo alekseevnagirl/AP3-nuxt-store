@@ -68,6 +68,16 @@ function getSelectedVariant(availableVariants: Variant[], selectedItems: string[
             if (arraysEqual(currentVariant, selectedItems)) selectedVariant = variant
 
         })
+        selectedVariant.attributes.forEach((attribute) => {
+            allOptions.forEach((option) => {
+                if (option.attribute_code === attribute.code) {
+                    option.values.forEach((value) => {
+                        if (value.value_index === attribute.value_index)
+                            attribute.label = value.label;
+                    })
+                }
+            })
+        })
     }
     return selectedVariant
 }

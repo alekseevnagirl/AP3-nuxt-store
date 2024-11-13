@@ -65,6 +65,7 @@ export interface Variant {
 export interface VariantAttribute {
     code: string;
     value_index: number;
+    label?: string;
 }
 
 export interface DisabledOption {

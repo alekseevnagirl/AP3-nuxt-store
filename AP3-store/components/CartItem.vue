@@ -17,18 +17,9 @@
                     </div>
                     <div 
                         v-for="(attribute, attributeId) in cartItemData.variant?.attributes"
-                        :key="attributeId">
-                        {{ attribute.code }}
-                    </div>
-                    <div 
-                        v-if="cartItemData.variant"
-                        class="cartItem__color__size">
-                        Color: {{ cartItemData?.variant?.product?.sku.split('-')[1] }}
-                    </div>
-                    <div
-                        v-if="cartItemData.variant"
-                        class="cartItem__color__size">
-                        Size: {{ cartItemData?.variant?.product?.sku.split('-')[2].toUpperCase() }}
+                        :key="attributeId"
+                        class="cartItem__attribute">
+                        {{ attribute.code }}: {{ attribute?.label }}
                     </div>
                 </div>
 
@@ -125,9 +116,10 @@
     .cartItem__brand {
         text-align: left;
     }
-    .cartItem__color__size {
+    .cartItem__attribute {
         font-size: 14px !important;
         padding: 0 0 0 5px !important;
+        text-align: left;
     }
     .cartItem__image {
         width: 150px;

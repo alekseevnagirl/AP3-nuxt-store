@@ -25,11 +25,19 @@ export const useCartStore = defineStore('alerts', {
                 this.cart.push(product)
         },
         deleteFromCart(product: Product) {
-            const index = this.cart.findIndex((item) => item.id === product.id);
+            const index = this.cart.findIndex((item) => 
+                (item.type === 'configurable' 
+                && item.id === product.id 
+                && item?.variant?.product?.id === product?.variant?.product?.id) 
+                || (item.type === 'simple' && item.id === product.id))
             this.cart = this.cart.filter((item, itemId) => itemId !== index);
         },
         updateCart(product: Product) {
-            const index = this.cart.findIndex((item: Cart) => item.id === product.id);
+            const index = this.cart.findIndex((item: Cart) => 
+                (item.type === 'configurable' 
+                && item.id === product.id 
+                && item?.variant?.product?.id === product?.variant?.product?.id) 
+                || (item.type === 'simple' && item.id === product.id));
             this.cart[index] = product;
         }
     }
