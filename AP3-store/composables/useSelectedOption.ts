@@ -32,7 +32,7 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
             else if (hasSameType) {
                 _selectedItems = _selectedItems.filter((value) => value.split(' ')[0] !== optionCode);
                 _selectedItems = _selectedItems.concat(newItem);
-                const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
+                const { disabledOptions, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
                 currentVariant.value = selectedVariant
                 _disabledValues = _disabledValues.filter((value) => value.code !== optionCode);
@@ -40,7 +40,7 @@ export function useSelectedOption (variants: Variant[], configurable_options: Op
             }
             else { 
                 _selectedItems = _selectedItems.concat(newItem);
-                const { disabledOptions, availableVariants, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
+                const { disabledOptions, selectedVariant } = productVariantsHelper(option, optionCode, variants, configurable_options, _selectedItems);
                 disabledValue.data = disabledOptions
                 currentVariant.value = selectedVariant
                 _disabledValues = _disabledValues.concat(disabledValue);

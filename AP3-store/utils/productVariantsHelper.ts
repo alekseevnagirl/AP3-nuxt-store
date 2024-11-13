@@ -16,7 +16,6 @@ export function productVariantsHelper(
     const selectedVariant = getSelectedVariant(availableVariants, selectedItems, allOptions);
 
     return {
-        availableVariants,
         disabledOptions,
         selectedVariant
     }
